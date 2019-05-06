@@ -49,6 +49,52 @@ export default class NotesApp extends React.Component {
         this.setState({
             selectedNote: id
         });
+    }
 
+    _updateNote = (idToUpdate, newText) => {
+        // We can't simply reassign the item in the array
+        // So, we need to create a new array with all the existing notes
+        // But, we want to use the newText for the note with id === idToUpdate
+
+        // Version 1:
+        const updatedNotes1 = this.state.notes.map(note => {
+            if (note.id === idToUpdate) {
+                return {
+                    ...note,        // Spread out all the existing key-value pairs
+                    text: newText   // But, overwrite *just* the text property
+                }
+
+            } else {
+                return {
+                    ...note
+                };
+            }
+        });
+        this.setState({
+            notes: updatedNotes1
+        })
+
+        // // Version 2a:
+        // const updateNotes2 = this.state.notes.filter(note => {
+        //     return note.id !== idToUpdate;
+        // });
+
+        // const theNoteToUpdate = this.state.notes.find(note => note.id === idToUpdate);
+        // this.setState({
+        //     notes: [
+        //         ...updatedNotes2,
+        //         {
+        //             ...theNoteToUpdate,
+        //             text: newText
+        //         }
+        //     ]
+        // });
+        // // Alternatively, version 2b:
+        // this.setState({
+        //     notes: updatedNotes2.concat({
+        //         ...theNoteToUpdate,
+        //         text: newText
+        //     })
+        // })
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './NotesList.module.css';
 
-function NotesListItem({key, id, text, handleClick}) {
+function NotesListItem({id, text, handleClick}) {
     return (
         <li>
             <a 
